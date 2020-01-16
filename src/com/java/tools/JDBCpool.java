@@ -21,6 +21,7 @@ public class JDBCpool {
 			Properties prop=new Properties();
 			prop.load(read);
 			System.out.println(read);
+			System.out.println("2222222");
 
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
