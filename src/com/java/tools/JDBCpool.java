@@ -23,6 +23,7 @@ public class JDBCpool {
 			System.out.println(read);
 			System.out.println("2222222");
 
+            System.out.println("111111");
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
 			String user=prop.getProperty("user");
