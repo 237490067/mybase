@@ -20,7 +20,7 @@ public class JDBCpool {
 			InputStream read=new FileInputStream(new File("D:"+File.separator+"jdbc.properties"));
 			Properties prop=new Properties();
 			prop.load(read);
-			
+			System.out.println(read);
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
 			String user=prop.getProperty("user");
@@ -28,14 +28,14 @@ public class JDBCpool {
 			int maxActive=Integer.parseInt(prop.getProperty("maxActive"));
 			int minIdle=Integer.parseInt(prop.getProperty("minIdle"));
 			int maxWait=Integer.parseInt(prop.getProperty("maxWait"));
-			//鍒涘缓閾炬帴姹�
+			//閸掓稑缂撻柧鐐复濮癸拷
 			dataSource=new DruidDataSource();
 			dataSource.setDriverClassName(driver);
 			dataSource.setUrl(url);
 			dataSource.setUsername(user);
 			dataSource.setPassword(password);
 			dataSource.setMaxActive(maxActive);
-			//琛ユ晳鎺柦鏃堕棿杈惧埌涓婄嚎鍥炲幓閾炬帴
+			//鐞涖儲鏅抽幒顏呮煢閺冨爼妫挎潏鎯у煂娑撳﹦鍤庨崶鐐插箵闁剧偓甯�
 		    dataSource.setRemoveAbandonedTimeout(3);
 		    dataSource.setRemoveAbandoned(true);
 			
