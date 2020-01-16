@@ -1,0 +1,36 @@
+
+<meta charset="UTF-8">
+<form id="inventory_upd_form">
+    <input type="hidden" name="iid"/>
+    cid:<input type="text"  name="cid"/><br/>
+     icod:<input type="text"  name="icod"/><br/>
+     inum:<input type="text"  name="inum"/><br/>
+        idata:<input type="text"  name="idata"/><br/>
+       iis:<input type="text"  name="iis"/><br/>
+         uid:<input type="text"  name="uid"/><br/>
+           imark:<input type="text"  name="imark"/><br/>
+    <input type="submit" value="保存" id="inventory_upd_save_btn"/>
+    
+</form>
+ <script>
+ $("#inventory_upd_save_btn").click(function(){
+ 	$.ajax({
+ 		cache:false,
+ 		url:"inventorysave.do",
+ 		data:$("#inventory_upd_form").serialize(),
+ 		method:"post",
+ 		async:true,
+ 		error:function(){
+ 			alert("error");
+ 		},
+ 		success:function(data){
+ 			alert(data);
+ 			$("#right").html(data);
+ 		}
+ 		
+ 	});
+ 	return false;
+ })
+
+ </script>
+

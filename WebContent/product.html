@@ -1,0 +1,113 @@
+<meta charset="UTF-8">
+ <a href="typeAdd.html" id="type_add_btn">增加</a>
+<table id="typeTable" align="center">
+  <thead>
+    <tr>
+    <th>类型ID</th>	
+    <th>类型编号</th>
+    <th>类型名称</th>
+    <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  </tbody>
+</table>
+   <script type="text/javascript">
+     loadData();
+     function loadData(){
+    	 $.ajax({
+    		 cache:false,
+    		 url:"product.do",
+    		 dataType:"json",
+    		 method:"post",
+    		 async:true,
+    		 error:function(){
+    			 alert("error");
+    		 },
+    		 success:function(data){
+    			var str=""
+    			 for(var i=0;i<data.length;i++){
+    				 str=str+"<tr>";
+    				 str=str+"<td>"+data[i].pid+"</td>";
+    				 str=str+"<td>"+data[i].pnum+"</td>";
+    				 str=str+"<td>"+data[i].name+"</td>";
+    				 str=str+"<td><a href='productdel.do' class='del_btn'>删除</a>";
+    				 str=str+"<a href='productupd.do' class='update_btn'>修改</a></td>";
+    				 str=str+"</tr>";
+    				 
+    			 }
+    			 $("#typeTable tbody").html(str);
+    			 delBtnClick();
+    			 updateBtnClick();
+    		 }
+    		 
+    	 })
+     }
+      function delBtnClick(){
+    	  $(".del_btn").click(function(){
+    		  var typeid=$(this).parents("tr").children("td").first().text();
+    		  $.ajax({
+    			  cache:false,
+    			  url:"productdel.do",
+    			  data:{"pid":typeid},
+    			  async:true,
+    			  method:"get",
+    			  error:function(){
+    				  alert("error");
+    			  },
+    			  success:function(data){
+    				  $("#right").html(data)
+    			  }
+    			
+    			  
+    		  })
+    		  return false;
+    	  })
+      }
+        $("#type_add_btn").click(function(){
+        	$.ajax({
+        		cache:false,
+        		url:"productadd.html",
+        		method:"post",
+        		async:true,
+        		error:function(){
+        			alert("error");
+        		},
+        		success:function(data){
+        			$("#right").html(data);
+        		}
+        		})
+        	return false;
+        })
+        function updateBtnClick(){
+        	$(".update_btn").click(function(){
+        		var typeId= $(this).parents("tr").children("td").first().text();
+        	$.ajax({
+        		cache:false,
+        		url:"productui.do",
+        		data:{"pid":typeId},
+        		method:"post",
+        		async:true,
+        		dataType:"json",
+        		error:function(){
+        			alert("error");
+        		},
+        		success:function(data){
+        			$("#right").load("productUpd.html",function(){
+        				$(":hidden[name=pid]").val(data.pid);
+        				$(":text[name=pnum]").val(data.pnum);
+        				$(":text[name=pname]").val(data.name);
+        			});
+        		}
+        		
+        	})
+        	return false;
+        	});
+        }
+        	
+        
+        		
+        
+        
+   </script>

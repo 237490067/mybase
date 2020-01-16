@@ -1,0 +1,25 @@
+
+<meta charset="UTF-8">
+ <form id="type_add_form">
+     类型编号：<input type="text"  name="productCode"/><br/>
+     类型名称：<input type="text"  name="productName"/><br/>
+     <input type="submit" value="增加" id="type_add_save_btn"/>
+ </form>
+   <script type="text/javascript">
+   $("#type_add_save_btn").click(function(){
+	   $.ajax({
+		   cache:false,
+		   url:"productadd.do",
+		   data:$("#type_add_form").serialize(),
+		   method:"post",
+		   async:true,
+		   error:function(){
+			   alert("error");
+		   },
+		   success:function(data){
+			   $("#right").html(data);
+		   }
+	   });
+	   return false;
+   });
+   </script>

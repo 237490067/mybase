@@ -1,0 +1,31 @@
+
+<meta charset="UTF-8">
+
+<form id="inventory_add_form">
+     cid:<input type="text"  name="cid"/><br/>
+     icod:<input type="text"  name="icod"/><br/>
+     inum:<input type="text"  name="inum"/><br/>
+        idata:<input type="text"  name="idata"/><br/>
+       iis:<input type="text"  name="iis"/><br/>
+         uid:<input type="text"  name="uid"/><br/>
+           imark:<input type="text"  name="imark"/><br/>
+     <input type="submit" value="增加" id="inventory_add_save_btn"/>
+ </form>
+   <script type="text/javascript">
+   $("#inventory_add_save_btn").click(function(){
+	   $.ajax({
+		   cache:false,
+		   url:"inventoryadd.do",
+		   data:$("#inventory_add_form").serialize(),
+		   method:"post",
+		   async:true,
+		   error:function(){
+			   alert("error");
+		   },
+		   success:function(data){
+			   $("#right").html(data);
+		   }
+	   });
+	   return false;
+   });
+   </script>

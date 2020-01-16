@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <select id="shengs">
+         <option>请选择省份</option>
+  </select>
+  <select id="citys">
+         <option>请选择城市</option>
+  </select>
+  <select id="areas">
+         <option>请选择区县</option>
+  </select>
+    
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript">
+    $.ajax({
+    	cache:false,
+    	url:"shengs.do",
+    	method:"get",
+    	async:true,
+    	dataType:"json",
+    	error:function(){
+    		alert("error");
+    	},
+    	success:function(data){
+    		var str="<option>请选择省份</option>"
+    		for(var i=0;i<data.length;i++){
+    			str=str+"<option value='"+data[i].s_id+"'>"+data[i].s_name+"</option>";
+    		}
+    		$("#shengs").html(str);
+    	}
+    });
+    $("#shengs").change(function(){
+    	$.ajax({
+    		cache:false,
+    		url:"citys.do",
+    		data:{"s_id":$("#shengs").val()},
+    		method:"get",
+    		aysnc:true,
+    		dataType:"json",
+    		error:function(){
+    			alert("error");
+    		},
+    		success:function(data){
+    			var str="<option>请选择城市</option>";
+    			for(var i=0;i<data.length;i++){
+    				str=str+"<option value='"+data[i].c_id+"'>"+data[i].c_name+"</option>";
+    			}
+    			$("#citys").html(str);
+    		}
+    	})
+    	
+    });
+      $("#citys").change(function(){
+    	  $.ajax({
+    		  cache:false,
+    	      url:"area.do",
+    	      data:{"c_id":$("#citys").val()},
+    	      method:"get",
+    	      aysnc:true,
+    	      dataType:"json",
+    	      error:function(){
+    	    	  alert("error");
+    	      },
+    	      success:function(data){
+    	    	  var str="<option>请选择区县</option>";
+    	    		  for(var i=0;i<data.length;i++){
+    	    			  str=str+"<option value='"+data[i].a_id+"'>"+data[i].a_name+"</option>";
+    	    		  }
+    	    	  $("#areas").html(str);
+    	      }
+    	  })
+    		  
+    	  
+      });
+    </script>
+</body>
+</html>

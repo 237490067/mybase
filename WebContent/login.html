@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form id="login_form">
+     <input type="text" name="userName"/><br/>
+     <input type="password" name="userPwd"/><br/>
+     <input type="submit" value="登陆" id="login_btn"/>
+</form>
+   <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+   <script>
+   $("#login_btn").click(function(){
+	   $.ajax({
+		   cache:false,
+		   url:"login.do",
+		   data:$("#login_form").serialize(),
+		   method:"post",
+		   async:true,
+		   error:function(){
+			   alert("error");
+		   },
+		   success:function(data){
+			   if(data=="true"){
+			   location.href='index.html';
+			   }
+			   else{
+			   alert("登陆失败");
+		   }
+		   }
+	   })
+	   return false;
+   })
+   </script>
+</body>
+</html>

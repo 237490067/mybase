@@ -1,0 +1,121 @@
+<meta charset="UTF-8">
+<a href="inventoryAdd.html" id="inventory_add_btn">增加</a>
+
+<table id="inventoryTable" align="center">
+  <thead>
+    <tr>
+    <th>iid</th>	
+    <th>cid</th>
+    <th>icod</th>
+    <th>inum</th>
+     <th>idata</th>
+      <th>iis</th>
+       <th>uid</th>
+        <th>imark</th>
+         <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<script type="text/javascript">
+   loaddata();
+   function loaddata(){
+	   $.ajax({
+		   cache:false,
+		   url:"inventory.do",
+		   method:"post",
+		   async:true,
+		   dataType:"json",
+		   error:function(){
+			   alert("error");
+		   },
+		   success:function(data){
+			   var str=""
+	    			 for(var i=0;i<data.length;i++){
+	    				 str=str+"<tr>";
+	    				 str=str+"<td>"+data[i].iid+"</td>";
+	    				 str=str+"<td>"+data[i].cid+"</td>";
+	    				 str=str+"<td>"+data[i].icod+"</td>";
+	    				 str=str+"<td>"+data[i].inum+"</td>";
+	    				 str=str+"<td>"+data[i].idate+"</td>";
+	    				 str=str+"<td>"+data[i].iis+"</td>";
+	    				 str=str+"<td>"+data[i].uid+"</td>";
+	    				 str=str+"<td>"+data[i].mark+"</td>";
+	    				 str=str+"<td><a href='inventorydel.do' class='del_btn'>删除</a>";
+	    				 str=str+"<a href='inventoryupd.do' class='update_btn'>修改</a></td>";
+	    				 str=str+"</tr>";
+	    				 
+	    			 }
+	    			 $("#inventoryTable tbody").html(str);
+	    			 delBtnClick();
+	    			 updateBtnClick();
+		   }
+		   
+	   })
+   }     
+             $("#inventory_add_btn").click(function(){
+            	 $.ajax({
+            		 cache:false,
+            		 url:"inventoryadd.html",
+            		 method:"post",
+            		 async:true,
+            		 error:function(){
+            			 alert("error");
+            		 },
+            		 success:function(data){
+            			 $("#right").html(data);
+            		 }
+            	 })
+            	 return false;
+             })
+           function delBtnClick(){
+            	$(".del_btn").click(function(){
+            		var id=$(this).parents("tr").children("td").first().text();
+            		$.ajax({
+            			cache:false,
+            			url:"inventorydel.do",
+            			data:{"iid":id},
+            			method:"post",
+            			async:true,
+            			error:function(){
+            				alert("error");
+            			},
+            			success:function(data){
+            				$("#right").html(data)
+            			}
+            		})
+            		return false;
+            	}) 
+             }
+             function updateBtnClick(){
+            	 $(".update_btn").click(function(){
+             		var id=$(this).parents("tr").children("td").first().text();
+             		$.ajax({
+             			cache:false,
+             			url:"inventoryui.do",
+             			method:"post",
+             			async:true,
+             			dataType:"json",
+             			data:{"iid":id},
+             			error:function(){
+             				alert("error");
+             			},
+             			success:function(data){
+             				$("#right").load("inventoryupd.html",function(){
+             					$(":hidden[name=iid]").val(data.iid);
+             					$(":text[name=cid]").val(data.cid);
+             					$(":text[name=icod]").val(data.icod);
+             					$(":text[name=inum]").val(data.inum);
+             					$(":text[name=idata]").val(data.idata);
+             					$(":text[name=iis]").val(data.iis);
+             					$(":text[name=uid]").val(data.uid);
+             					$(":text[name=imark]").val(data.imark);
+             				})
+             			}
+             		})
+                      return false;
+            	 })
+             }
+
+</script>

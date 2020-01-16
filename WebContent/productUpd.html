@@ -1,0 +1,28 @@
+
+<meta charset="UTF-8">
+ <form id="type_upd_form">
+    <input type="hidden" name="pid"/>
+    <input type="text" name="pnum"/>
+    <input type="text" name="pname"/>
+    <input type="submit" value="保存" id="type_upd_save_btn"/>
+    
+</form>
+ <script>
+    $("#type_upd_save_btn").click(function(){
+    	$.ajax({
+    		cache:false,
+    		url:"productsave.do",
+    		data:$("#type_upd_form").serialize(),
+    		method:"post",
+    		async:true,
+    		error:function(){
+    			alert("error");
+    		},
+    		success:function(data){
+    			$("#right").html(data);
+    		}
+    		
+    	});
+    	return false;
+    })
+ </script>
