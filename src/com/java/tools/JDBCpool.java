@@ -22,6 +22,7 @@ public class JDBCpool {
 			prop.load(read);
 			System.out.println(read);
 			System.out.println("11111");
+			System.out.println("333333");
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
 			String user=prop.getProperty("user");
