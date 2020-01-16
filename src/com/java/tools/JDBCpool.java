@@ -31,6 +31,7 @@ public class JDBCpool {
             System.out.println("aaaaaaaaaaaaa");
             System.out.println("dsadsadsad");
             System.out.println("dsadsadsad");
+            System.out.println("000000000000");
 
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
