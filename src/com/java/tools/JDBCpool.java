@@ -21,12 +21,22 @@ public class JDBCpool {
 			Properties prop=new Properties();
 			prop.load(read);
 			System.out.println(read);
+<<<<<<< HEAD
+=======
+			System.out.println("2222222");
+
+            System.out.println("111111");
+            System.out.println("8888888888");
+>>>>>>> branch 'devoloper' of https://github.com/237490067/mybase.git
             System.out.println("111111");
             System.out.print("33333");
             System.out.println("444444");
             System.out.println("55555555");
+<<<<<<< HEAD
 			System.out.println("2222222");
 
+=======
+>>>>>>> branch 'devoloper' of https://github.com/237490067/mybase.git
 			String driver=prop.getProperty("driver");
 			String url=prop.getProperty("url");
 			String user=prop.getProperty("user");
